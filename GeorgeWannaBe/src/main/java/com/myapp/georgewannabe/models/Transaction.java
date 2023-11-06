@@ -23,7 +23,6 @@ public class Transaction {
     private Double amount;
     private String description;
     private String date;
-    private String time;
     private Double fee;
 
 }
