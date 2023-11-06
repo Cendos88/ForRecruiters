@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountInDTO {
-   private Long ownerId;
    private String name;
 
 }

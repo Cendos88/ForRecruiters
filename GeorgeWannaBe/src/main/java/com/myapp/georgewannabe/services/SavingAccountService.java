@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 public class SavingAccountService implements AccountService {
     private final AccountRepository accountRepository;
 
-
     @Override
     public Long createAccount(AccountInDTO accountInDTO) {
         Account newAccount = Account.builder()
@@ -35,53 +34,55 @@ public class SavingAccountService implements AccountService {
         if (notOwnerOfAccount(id)) {
             throw new GeorgeException("You are not the owner of this account");
         }
-      accountRepository.deleteById(id);
+        accountRepository.deleteById(id);
         return id;
     }
 
     @Override
     public Long deposit(Long accountId, Double amount) throws GeorgeException {
-        Account account=accountRepository.findById(accountId).get();
+        Account account = accountRepository.findById(accountId).get();
         if (notOwnerOfAccount(accountId)) {
             throw new GeorgeException("You are not the owner of this account");
         }
-        account.setBalance(account.getBalance()+amount);
+        account.setBalance(account.getBalance() + amount);
         accountRepository.save(account);
         return accountId;
     }
 
     @Override
     public Long withdraw(Long id, Double amount) throws GeorgeException {
-        if(notOwnerOfAccount(id)){
+        if (notOwnerOfAccount(id)) {
             throw new GeorgeException("You are not the owner of this account");
         }
-        Account account=accountRepository.findById(id).get();
-        account.setBalance(account.getBalance()-amount);
+        Account account = accountRepository.findById(id).get();
+        account.setBalance(account.getBalance() - amount);
         accountRepository.save(account);
         return id;
     }
 
     @Override
     public Double getBalance(Long accountId) throws GeorgeException {
-        if(notOwnerOfAccount(accountId)){
+        if (notOwnerOfAccount(accountId)) {
             throw new GeorgeException("You are not the owner of this account");
         }
-        Account account=accountRepository.findById(accountId).get();
+        Account account = accountRepository.findById(accountId).get();
         return account.getBalance();
     }
 
     @Override
     public Double doInterest(Long id) {
-        Account account=accountRepository.findById(id).get();
-        account.setBalance(account.getBalance()*1.01);
+        Account account = accountRepository.findById(id).get();
+        account.setBalance(account.getBalance() * 1.01);
         accountRepository.save(account);
         return account.getBalance();
     }
+
     private static boolean notOwnerOfAccount(Long accountId) {
         Long ownerId = getOwnerId();
         return !ownerId.equals(accountId);
     }
-    private static Long getOwnerId(){
+
+    private static Long getOwnerId() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user.getId();
     }
