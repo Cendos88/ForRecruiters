@@ -9,3 +9,6 @@ Next step will be account service that will provide transactions with fee to the
 Today I added  basic account and transaction service functionality and some Exception handling.
 Tomorrow I will finish core backend functionality then I will go JavaDays to get some inspiration and I will start frontend at weekend.
 Front end will be in challenge because want to do it in React and I have never used it before.
+Backends basic functionality is in first version, definitely needs more love.  
+But right now  I am really looking forward to react.
+
