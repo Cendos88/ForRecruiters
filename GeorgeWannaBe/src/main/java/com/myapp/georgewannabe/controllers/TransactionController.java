@@ -21,7 +21,7 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transactions/{transactionId}")
+    @GetMapping("/transaction/{transactionId}")
     public ResponseEntity<?> getTransaction(@PathVariable Long transactionId) {
         try {
             return ResponseEntity.status(200).body(transactionService.getTransaction(transactionId));
@@ -48,8 +48,8 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transactions/{accountId}/{date}")//date format: yyyy-MM-dd
-    public ResponseEntity<?> getAllTransactionsByDate(@PathVariable Long accountId, @PathVariable String date) {
+    @GetMapping("/transactions")//date format: yyyy-MM-dd
+    public ResponseEntity<?> getAllTransactionsByDate(@RequestParam Long accountId, @RequestParam String date) {
         try {
             return ResponseEntity.status(200).body(transactionService.getAllTransactionsByDate(accountId, date));
         } catch (GeorgeException e) {
@@ -57,8 +57,8 @@ public class TransactionController {
         }
     }
 
-    @GetMapping("/transactions/{accountId}/{amount}")
-    public ResponseEntity<?> getAllTransactionsByAmount(@PathVariable Double amount, @PathVariable Long accountId) {
+    @GetMapping("/transactions/amount/{accountId}")
+    public ResponseEntity<?> getAllTransactionsByAmount(@RequestParam Double amount, @PathVariable Long accountId) {
         try {
             return ResponseEntity.status(200).body(transactionService.getAllTransactionsByAmount(amount, accountId));
         } catch (GeorgeException e) {

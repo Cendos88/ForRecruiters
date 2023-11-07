@@ -73,7 +73,7 @@ public class TransactionServiceImpl implements TransactionService {
         if (notOwnerOfAccount(accountId)) {
             throw new GeorgeException("You are not the owner of this account");
         }
-        return null;
+        return transactionRepository.findAllBySenderAccountIdAndDate(accountId,date);
     }
 
     @Override
