@@ -6,10 +6,7 @@ import com.myapp.georgewannabe.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -26,8 +23,8 @@ public class SavingAccountController {
     public ResponseEntity<?> createSavingAccount(@RequestBody AccountInDTO accountInDTO) {
         return ResponseEntity.status(200).body(accountService.createAccount(accountInDTO));
     }
-    @PostMapping("/deleteSavingAccount")
-    public ResponseEntity<?> deleteSavingAccount(@RequestBody Long id) {
+    @DeleteMapping("/deleteSavingAccount/{id}")
+    public ResponseEntity<?> deleteSavingAccount(@PathVariable Long id) {
         try {
             return ResponseEntity.status(200).body(accountService.deleteAccount(id));
         }catch (GeorgeException e){
