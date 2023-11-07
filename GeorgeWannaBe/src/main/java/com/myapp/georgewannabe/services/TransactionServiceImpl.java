@@ -32,10 +32,10 @@ public class TransactionServiceImpl implements TransactionService {
                 .description(transactionDtoIn.getDescription())
                 .date(LocalDate.now().toString())
                 .build();
-        Account senderAccount = accountRepository.findById(transactionDtoIn.getSenderAccountId()).get();
+        Account senderAccount = accountRepository.findById(transactionDtoIn.getSenderAccountId()).orElseThrow( () -> new GeorgeException("Senders account not found"));
         senderAccount.setBalance(senderAccount.getBalance() - transactionDtoIn.getAmount());
         accountRepository.save(senderAccount);
-        Account receiverAccount = accountRepository.findById(transactionDtoIn.getReceiverAccountId()).get();
+        Account receiverAccount = accountRepository.findById(transactionDtoIn.getReceiverAccountId()).orElseThrow( () -> new GeorgeException("Receivers account not found"));
         receiverAccount.setBalance(receiverAccount.getBalance() + transactionDtoIn.getAmount());
         accountRepository.save(receiverAccount);
         transactionRepository.save(newTransaction);
@@ -44,7 +44,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction getTransaction(Long transactionId) throws GeorgeException {
-        Transaction transaction =transactionRepository.findById(transactionId).get();
+        Transaction transaction =transactionRepository.findById(transactionId).orElseThrow( () -> new GeorgeException("Transaction not found"));
         if(notOwnerOfAccount(transaction.getSenderAccountId()) && notOwnerOfAccount(transaction.getReceiverAccountId())){
             throw new GeorgeException("Dont look into others accounts");
         }
@@ -84,9 +84,9 @@ public class TransactionServiceImpl implements TransactionService {
         return null;
     }
 
-    private boolean notOwnerOfAccount(Long accountId) {
+    private boolean notOwnerOfAccount(Long accountId) throws GeorgeException {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Account account = accountRepository.findById(accountId).get();
+        Account account = accountRepository.findById(accountId).orElseThrow(()-> new GeorgeException("Account not found"));
         return !user.getId().equals(account.getOwnerId());
     }
 }
