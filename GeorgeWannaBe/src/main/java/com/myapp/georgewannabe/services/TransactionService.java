@@ -1,6 +1,6 @@
 package com.myapp.georgewannabe.services;
 
-import com.myapp.georgewannabe.dtos.TransactionDtoIn;
+import com.myapp.georgewannabe.dtos.TransactionDTOIn;
 import com.myapp.georgewannabe.models.GeorgeException;
 import com.myapp.georgewannabe.models.Transaction;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface TransactionService {
-    public Long createTransaction(TransactionDtoIn transactionDtoIn) throws GeorgeException;
+    public Long createTransaction(TransactionDTOIn transactionDtoIn) throws GeorgeException;
 
     public Transaction getTransaction(Long transactionId) throws GeorgeException;
 

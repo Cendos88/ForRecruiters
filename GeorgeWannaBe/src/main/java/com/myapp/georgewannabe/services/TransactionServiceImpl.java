@@ -1,6 +1,6 @@
 package com.myapp.georgewannabe.services;
 
-import com.myapp.georgewannabe.dtos.TransactionDtoIn;
+import com.myapp.georgewannabe.dtos.TransactionDTOIn;
 import com.myapp.georgewannabe.models.Account;
 import com.myapp.georgewannabe.models.GeorgeException;
 import com.myapp.georgewannabe.models.Transaction;
@@ -21,7 +21,7 @@ public class TransactionServiceImpl implements TransactionService {
     private final AccountRepository accountRepository;
 
     @Override
-    public Long createTransaction(TransactionDtoIn transactionDtoIn) throws GeorgeException {
+    public Long createTransaction(TransactionDTOIn transactionDtoIn) throws GeorgeException {
         if (notOwnerOfAccount(transactionDtoIn.getSenderAccountId())) {
             throw new GeorgeException("You are not the owner of this account");
         }
@@ -84,8 +84,9 @@ public class TransactionServiceImpl implements TransactionService {
         return null;
     }
 
-    private static boolean notOwnerOfAccount(Long accountId) {
+    private boolean notOwnerOfAccount(Long accountId) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return !user.getId().equals(accountId);
+        Account account = accountRepository.findById(accountId).get();
+        return !user.getId().equals(account.getOwnerId());
     }
 }
