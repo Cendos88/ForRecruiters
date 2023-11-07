@@ -23,19 +23,21 @@ public class SavingAccountController {
     public ResponseEntity<?> createSavingAccount(@RequestBody AccountInDTO accountInDTO) {
         return ResponseEntity.status(200).body(accountService.createAccount(accountInDTO));
     }
+
     @DeleteMapping("/deleteSavingAccount/{id}")
     public ResponseEntity<?> deleteSavingAccount(@PathVariable Long id) {
         try {
             return ResponseEntity.status(200).body(accountService.deleteAccount(id));
-        }catch (GeorgeException e){
+        } catch (GeorgeException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
+
     @PostMapping("/getSavingBalance")
     public ResponseEntity<?> getSavingBalance(@RequestHeader Long id) {
         try {
             return ResponseEntity.status(200).body(accountService.getBalance(id));
-        }catch (GeorgeException e){
+        } catch (GeorgeException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }

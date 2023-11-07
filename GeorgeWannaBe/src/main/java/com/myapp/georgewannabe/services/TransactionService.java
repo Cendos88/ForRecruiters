@@ -9,17 +9,17 @@ import java.util.List;
 
 @Service
 public interface TransactionService {
-    public Long createTransaction(TransactionDTOIn transactionDtoIn) throws GeorgeException;
+    Long createTransaction(TransactionDTOIn transactionDtoIn) throws GeorgeException;
 
-    public Transaction getTransaction(Long transactionId) throws GeorgeException;
+    Transaction getTransaction(Long transactionId) throws GeorgeException;
 
-    public List<Transaction> getAllTransactionsByAccount(Long accountId) throws GeorgeException;
+    List<Transaction> getAllTransactionsByAccount(Long accountId) throws GeorgeException;
 
-    public List<Transaction> getAllTransactionsByTwoAccounts(Long senderId, Long receiverId) throws GeorgeException;
+    List<Transaction> getAllTransactionsByTwoAccounts(Long senderId, Long receiverId) throws GeorgeException;
 
-    public List<Transaction> getAllTransactionsByDate(Long accountId, String date) throws GeorgeException;
+    List<Transaction> getAllTransactionsByDate(Long accountId, String date) throws GeorgeException;
 
-    public List<Transaction> getAllTransactionsByAmount(Double amount, Long accountId) throws GeorgeException;
+    List<Transaction> getAllTransactionsByAmount(Double amount, Long accountId) throws GeorgeException;
 
 
 }

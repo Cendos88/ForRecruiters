@@ -56,8 +56,9 @@ public class TransactionController {
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
+
     @GetMapping("/transactions/{accountId}/{amount}")
-    public ResponseEntity<?> getAllTransactionsByAmount(@PathVariable Double amount,@PathVariable Long accountId ) {
+    public ResponseEntity<?> getAllTransactionsByAmount(@PathVariable Double amount, @PathVariable Long accountId) {
         try {
             return ResponseEntity.status(200).body(transactionService.getAllTransactionsByAmount(amount, accountId));
         } catch (GeorgeException e) {

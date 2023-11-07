@@ -39,7 +39,6 @@ public class SavingAccountService implements AccountService {
     }
 
 
-
     @Override
     public Double getBalance(Long accountId) throws GeorgeException {
         if (notOwnerOfAccount(accountId)) {
@@ -57,7 +56,7 @@ public class SavingAccountService implements AccountService {
         return account.getBalance();
     }
 
-    private  boolean notOwnerOfAccount(Long accountId) throws GeorgeException {
+    private boolean notOwnerOfAccount(Long accountId) throws GeorgeException {
         Long ownerId = getOwnerId();
         Account account = accountRepository.findById(accountId).orElseThrow(() -> new GeorgeException("Account not found"));
         Long accountOwnerId = account.getOwnerId();
