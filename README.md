@@ -10,5 +10,5 @@ Today I added  basic account and transaction service functionality and some Exce
 Tomorrow I will finish core backend functionality then I will go JavaDays to get some inspiration and I will start frontend at weekend.  
 Front end will be in challenge because want to do it in React and I have never used it before.  
 Backends basic functionality is in first version I know that it needs a lot more love.  
-But right now  I am really looking forward to react and I know that in my upcomming mental breakdown from FE I will gladly come back to BE.
+But right now  I am really looking forward to react and I know that in my upcoming mental breakdown from FE I will gladly come back to BE.
 
