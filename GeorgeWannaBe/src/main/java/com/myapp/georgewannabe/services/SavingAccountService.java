@@ -38,27 +38,7 @@ public class SavingAccountService implements AccountService {
         return id;
     }
 
-    @Override
-    public Long deposit(Long accountId, Double amount) throws GeorgeException {
-        Account account = accountRepository.findById(accountId).get();
-        if (notOwnerOfAccount(accountId)) {
-            throw new GeorgeException("You are not the owner of this account");
-        }
-        account.setBalance(account.getBalance() + amount);
-        accountRepository.save(account);
-        return accountId;
-    }
 
-    @Override
-    public Long withdraw(Long id, Double amount) throws GeorgeException {
-        if (notOwnerOfAccount(id)) {
-            throw new GeorgeException("You are not the owner of this account");
-        }
-        Account account = accountRepository.findById(id).get();
-        account.setBalance(account.getBalance() - amount);
-        accountRepository.save(account);
-        return id;
-    }
 
     @Override
     public Double getBalance(Long accountId) throws GeorgeException {
@@ -77,9 +57,10 @@ public class SavingAccountService implements AccountService {
         return account.getBalance();
     }
 
-    private static boolean notOwnerOfAccount(Long accountId) {
+    private  boolean notOwnerOfAccount(Long accountId) {
         Long ownerId = getOwnerId();
-        return !ownerId.equals(accountId);
+        Long accountOwnerId = accountRepository.findById(accountId).get().getOwnerId();
+        return !ownerId.equals(accountOwnerId);
     }
 
     private static Long getOwnerId() {

@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 public interface AccountService {
     public Long createAccount(AccountInDTO accountInDTO);
     public Long deleteAccount(Long id) throws GeorgeException;
-    public Long deposit(Long id, Double amount) throws GeorgeException;
-    public Long withdraw(Long id, Double amount) throws GeorgeException;
     public Double getBalance(Long id) throws GeorgeException;
     public Double doInterest(Long id);
 
