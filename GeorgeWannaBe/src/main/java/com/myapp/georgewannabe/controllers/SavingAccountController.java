@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 
 public class SavingAccountController {
     private final AccountService accountService;
@@ -17,6 +18,11 @@ public class SavingAccountController {
     @Autowired
     public SavingAccountController(@Qualifier("savingAccountService") AccountService accountService) {
         this.accountService = accountService;
+    }
+
+    @GetMapping("/savingAccounts")
+    public ResponseEntity<?> getSavingAccounts() {
+        return ResponseEntity.status(200).body(accountService.getAccounts());
     }
 
     @PostMapping("/createSavingAccount")

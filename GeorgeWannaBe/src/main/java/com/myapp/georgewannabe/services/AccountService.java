@@ -12,6 +12,5 @@ public interface AccountService {
     public Double doInterest(Long id);
 
 
-
-
+    Object getAccounts();
 }

@@ -10,12 +10,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
+
 @RequiredArgsConstructor
 
 public class SavingAccountService implements AccountService {
     private final AccountRepository accountRepository;
+
+
+    public List<Account> getAccounts() {
+
+        return accountRepository.findAllByOwnerId(getOwnerId());
+    }
 
     @Override
     public Long createAccount(AccountInDTO accountInDTO) {
